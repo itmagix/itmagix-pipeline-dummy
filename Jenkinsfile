@@ -25,9 +25,8 @@ echo "Build tag ${env.BUILD_TAG}"
        }
      }
 
-     stage('BeersAndBarrels') {
-       sh "echo Tafeltje zoeken bij BandB"
-       sh "sleep 5"
+     stage('Starting Application') {
+       sh "java -jar build/libs/itmagix-pipeline-dummy.jar"
      }
 
      stage('DronkenNaarHuis') {
