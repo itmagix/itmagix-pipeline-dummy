@@ -31,6 +31,6 @@ echo "Build tag ${env.BUILD_TAG}"
 
      stage('Testing Application Startup') {
        sh "netstat -plnt | grep ':8080'"
-       sh "echo $?"
+       sh "echo ${?}"
      }
 }
