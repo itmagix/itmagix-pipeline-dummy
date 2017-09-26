@@ -10,8 +10,8 @@ def DEVELOP_BRANCH = env.BRANCH_NAME == "develop"
 node('slave1') {
 
      // Echo environment
-     sh "echo Running as user \$(whoami)
-     sh "echo Running from \$(pwd)
+// Maikel     sh "echo Running as user \$(whoami)
+// Maikel     sh "echo Running from \$(pwd)
      echo "Build tag ${env.BUILD_TAG}"
 
      stage('Checkout') {
