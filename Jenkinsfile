@@ -26,7 +26,7 @@ echo "Build tag ${env.BUILD_TAG}"
      }
 
      stage('Starting Application') {
-       sh "java -jar build/libs/itmagix-pipeline-dummy.jar"
+       sh "java -jar build/libs/itmagix-pipeline-dummy-0.0.1.jar"
      }
 
      stage('DronkenNaarHuis') {
