@@ -26,11 +26,11 @@ echo "Build tag ${env.BUILD_TAG}"
      }
 
      stage('Starting Application') {
-       sh "java -jar build/libs/itmagix-pipeline-dummy-0.0.1.jar"
+       sh "java -jar build/libs/itmagix-pipeline-dummy-0.0.1.jar &"
      }
 
-     stage('DronkenNaarHuis') {
-       sh "echo Lamlazerus op het fietsje naar huis"
-       sh "sleep 6"
+     stage('Testing Application Startup') {
+       sh "netstat -plnt | grep ':8080'"
+       sh "echo $?"
      }
 }
