@@ -18,7 +18,7 @@ node('slave1') {
        checkout scm
      }
 
-     def helper = load 'build-helper.groovy'
+// Maikel     def helper = load 'build-helper.groovy'
 
      stage('BiertjeHalen') {
        timeout(time: 15, unit: 'SECONDS') {
