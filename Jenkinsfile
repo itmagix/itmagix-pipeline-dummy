@@ -10,23 +10,18 @@ def DEVELOP_BRANCH = env.BRANCH_NAME == "develop"
 node('slave1') {
 
      // Echo environment
-// Maikel     sh "echo Running as user \$(whoami)
-// Maikel     sh "echo Running from \$(pwd)
-     echo "Build tag ${env.BUILD_TAG}"
+echo "Build tag ${env.BUILD_TAG}"
 
      stage('Checkout') {
        checkout scm
      }
 
-// Maikel     def helper = load 'build-helper.groovy'
-
-     stage('BiertjeHalen') {
+     stage('Build Application') {
        timeout(time: 15, unit: 'SECONDS') {
          echo "Branch name: ${env.BRANCH_NAME}"
          echo "Build number name: ${currentBuild.number}"
 
-         sh "echo laten we een lekker biertje pakken vrienden"
-         sh "sleep 4"
+         sh "./gradlew build"
        }
      }
 
