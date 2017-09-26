@@ -1,8 +1,6 @@
 #!groovy
 
-// This is just a test Jenkinsfile for use as Dummy to show-off our pipeline environment
-
-def REMOTE_HOST = 'lsrv6769.linux.rabobank.nl'
+def REMOTE_HOST = 'docker.itmagix.nl'
 def REMOTE_PORT = '2375'
 def DOCKER_HOST = REMOTE_HOST + ':' + REMOTE_PORT
 def MASTER_BRANCH = env.BRANCH_NAME == "master"
