@@ -36,6 +36,6 @@ node('slave1') {
      }
 
      stage ('Starting Fitnesse to run Selenium Tests') {
-       echo "Starting Fitnesse to run Selenium Tests
+       echo "Starting Fitnesse to run Selenium Tests"
      }
 }
