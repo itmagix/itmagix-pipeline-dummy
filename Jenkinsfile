@@ -1,8 +1,10 @@
 #!groovy
 
 def REMOTE_HOST = 'docker.itmagix.nl'
+def LOCAL_HOST = '127.0.0.1'
 def REMOTE_PORT = '2375'
 def DOCKER_HOST = REMOTE_HOST + ':' + REMOTE_PORT
+def APP_PORT = '8080'
 def MASTER_BRANCH = env.BRANCH_NAME == "master"
 def DEVELOP_BRANCH = env.BRANCH_NAME == "develop"
 
@@ -29,7 +31,11 @@ node('slave1') {
        sh "java -jar build/libs/itmagix-pipeline-dummy-0.0.1.jar &"
      }
 
-     stage('Testing Application Startup') {
-       sh "netstat -plnt | grep ':8080'"
+     stage('Waiting for Spring Boot') {
+       sh "sh wait.sh ${LOCAL_HOST} ${APP_PORT}"
+     }
+
+     stage ('Starting Fitnesse to run Selenium Tests) {
+       echo "Starting Fitnesse to run Selenium Tests
      }
 }
