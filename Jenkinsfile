@@ -20,8 +20,8 @@ node('slave1') {
        timeout(time: 15, unit: 'SECONDS') {
          echo "Branch name: ${env.BRANCH_NAME}"
          echo "Build number name: ${currentBuild.number}"
+
          sh "./gradlew build"
-         junit '**/target/surefire-reports/TEST-*.xml'
        }
      }
 
