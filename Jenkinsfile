@@ -36,7 +36,7 @@ node('slave1') {
      }
 
      stage ('Starting Cucumber to run Selenium Tests') {
-       sh "npm install"
+       sh "(cd cucumber-protractor-boilerplate1 && npm install)"
        sh "(cd cucumber-protractor-boilerplate1 && npm run test teamServer.conf.js)"
      }
 }
