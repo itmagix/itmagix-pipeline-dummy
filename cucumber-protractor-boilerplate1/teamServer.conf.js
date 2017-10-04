@@ -6,7 +6,7 @@ exports.config = {
     // path relative to the current config file
     frameworkPath: require.resolve('protractor-cucumber-framework'),
     capabilities: {
-        'browserName': 'internet explorer',
+        'browserName': 'internetexplorer',
     },
 
 
