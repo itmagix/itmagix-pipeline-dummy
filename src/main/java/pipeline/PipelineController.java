@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PipelineController {
 
-    @RequestMapping("/pipeline")
+    @RequestMapping("/pipelines")
     public String pipeline(@RequestParam(value="name", required=false, defaultValue="Pipeline IT Magix") String name, Model model) {
         model.addAttribute("name", name);
         return "pipeline";
