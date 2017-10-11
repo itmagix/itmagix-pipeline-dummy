@@ -35,8 +35,8 @@ node('slave1') {
        sh "sh wait.sh ${LOCAL_HOST} ${APP_PORT}"
      }
 
-     stage ('Starting Cucumber to run Selenium Tests') {
-       sh "(cd cucumber-protractor-boilerplate1 && npm install)"
-       sh "(cd cucumber-protractor-boilerplate1 && npm run test teamServer.conf.js)"
+     stage ('Starting Protractor to run Selenium Tests') {
+       sh "(cd test && npm install -g protractor)"
+       sh "(cd test && protractor conf.js)"
      }
 }
