@@ -35,7 +35,7 @@ node('slave1') {
        sh "sh wait.sh ${LOCAL_HOST} ${APP_PORT}"
      }
 
-     stage ('Starting Protractor to run Selenium Tests') {
+     stage ('Starting Protractor / Selenium Tests') {
        sh "(cd test && npm install)"
        sh "(cd test && node_modules/protractor/bin/protractor conf.js)"
      }
