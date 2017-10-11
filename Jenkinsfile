@@ -36,7 +36,7 @@ node('slave1') {
      }
 
      stage ('Starting Protractor to run Selenium Tests') {
-       sh "(cd test && npm install -g protractor)"
-       sh "(cd test && protractor conf.js)"
+       sh "(cd test && npm install)"
+       sh "(cd test && node_modules/protractor/bin/protractor conf.js)"
      }
 }
