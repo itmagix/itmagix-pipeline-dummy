@@ -1,0 +1,27 @@
+{
+  "name": "itmagix_pipeline_dummy_application_test",
+  "version": "1.0.0",
+  "description": "IT Magix Pipeline Dummy Application Test",
+  "main": "conf.js",
+  "scripts": {
+    "test": "protractor"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itmagix/itmagix-pipeline-dummy.git"
+  },
+  "keywords": [
+    "protractor",
+    "nodejs",
+    "java"
+  ],
+  "author": "Maikel Dolle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itmagix/itmagix-pipeline-dummy/issues"
+  },
+  "homepage": "https://github.com/itmagix/itmagix-pipeline-dummy#readme",
+  "dependencies": {
+    "protractor": "^5.1.2"
+  }
+}
