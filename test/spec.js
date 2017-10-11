@@ -9,6 +9,6 @@ describe('IT Magix Pipeline Demo', function() {
   it('should be able to open pipeline app', function() {
     browser.waitForAngularEnabled(false);
     browser.get('http://192.168.2.121:8080/pipeline');
-    expect(browser.getTitle()).toEqual('IT Magix Pipeline Dummy Application KAPOT!!!');
+    expect(browser.getTitle()).toEqual('IT Magix Pipeline Dummy Application');
   });
 });
