@@ -9,7 +9,7 @@ def MASTER_BRANCH = env.BRANCH_NAME == "master"
 def DEVELOP_BRANCH = env.BRANCH_NAME == "develop"
 
 // It's a kind of magic!
-node('it4it-buildrunner1') {
+node('buildrunner1') {
 
      // Echo environment
     echo "Build tag ${env.BUILD_TAG}"
@@ -34,7 +34,7 @@ node('it4it-buildrunner1') {
      }
 }
 
-node('it4it-testrunner2') {
+node('testrunner1') {
      stage("Cleanup workspace ${NODE_NAME}") {
        sh "find -name node_modules | xargs rm -fr"
        step([$class: 'WsCleanup', deleteDirs: true, notFailBuild: true, patterns: [[pattern: '*', type: 'INCLUDE']]])
