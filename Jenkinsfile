@@ -9,7 +9,7 @@ def MASTER_BRANCH = env.BRANCH_NAME == "master"
 def DEVELOP_BRANCH = env.BRANCH_NAME == "develop"
 
 // Don't run on the master node
-node('slave1') {
+node('testslave1') {
 
      // Echo environment
     echo "Build tag ${env.BUILD_TAG}"
