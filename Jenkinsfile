@@ -19,7 +19,7 @@ node('testrunner1') {
      }
 
      stage('Build Application') {
-       timeout(time: 15, unit: 'SECONDS') {
+       timeout(time: 120, unit: 'SECONDS') {
          echo "Branch name: ${env.BRANCH_NAME}"
          echo "Build number name: ${currentBuild.number}"
 
