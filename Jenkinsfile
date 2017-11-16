@@ -32,9 +32,12 @@ node('ec2-buildrunner1') {
          stash name: 'source', useDefaultExcludes: true
          withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
          // available as an env variable, but will be masked if you try to print it out any which way
-         sh 'echo $PASSWORD'
+         sh 'echo "Show as shell command'
+         sh 'echo $PASSWORD && echo $USERNAME'
          // also available as a Groovy variable—note double quotes for string interpolation
+         sh 'echo "Show as Groovy"'
          echo "$USERNAME"
+         echo "$PASSWORD"
 }
        }
      }
