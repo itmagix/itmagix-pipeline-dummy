@@ -68,6 +68,7 @@ node('itmagix-testrunner1') {
        sh 'echo "COPY target/itmagix-pipeline-dummy-0.0.1.jar /itmagix-pipeline-dummy-0.0.1.jar" >> target/Dockerfile'
        sh 'echo "CMD ["java","-jar","/itmagix-pipeline-dummy-0.0.1.jar"] >> target/Dockerfile'
        sh 'docker build -t itmagix-pipeline-dummy target/'
+     }
 
      stage ('Closing the Springboot environment') {
        sh "kill `ps -ef | grep java | grep pipeline-dummy | head -n1 | awk \$'{print \$2}'`"
