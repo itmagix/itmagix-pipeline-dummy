@@ -30,6 +30,12 @@ node('ec2-buildrunner1') {
          sh "/usr/local/maven/bin/mvn clean install"
          sh "(cd test && npm install)"
          stash name: 'source', useDefaultExcludes: true
+         withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+         // available as an env variable, but will be masked if you try to print it out any which way
+         sh 'echo $PASSWORD'
+         // also available as a Groovy variable—note double quotes for string interpolation
+         echo "$USERNAME"
+}
        }
      }
 }
