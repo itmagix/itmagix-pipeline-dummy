@@ -81,5 +81,7 @@ node('itmagix-testrunner1') {
      stage ('Clean up the test environment') {
        sh "kill `ps -ef | grep java | grep pipeline-dummy | head -n1 | awk \$'{print \$2}'`"
        sh 'for i in `sudo docker images -q` ; do sudo docker rmi $i ; done'
+       sh "find -name node_modules | xargs rm -fr"
+       step([$class: 'WsCleanup', deleteDirs: true, notFailBuild: true, patterns: [[pattern: '*', type: 'INCLUDE']]])
      }
 }
