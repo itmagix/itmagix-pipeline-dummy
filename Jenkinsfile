@@ -72,12 +72,9 @@ node('itmagix-testrunner1') {
       
      stage ('Push Docker image to Docker Hub') {
        withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-         // available as an env variable, but will be masked if you try to print it out any which way
-         sh 'echo "Show as shell command"'
-         sh 'echo $PASSWORD $USERNAME'
          sh "sudo docker login -u $USERNAME -p $PASSWORD"
-         sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
        }
+       sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
      }
 
      stage ('Trigger production servers to pull latest version of Docker Image') {
