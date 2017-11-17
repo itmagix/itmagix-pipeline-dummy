@@ -75,6 +75,7 @@ node('itmagix-testrunner1') {
          sh "sudo docker login -u $USERNAME -p $PASSWORD"
        }
        sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
+       sh "sudo docker logout"
      }
 
      stage ('Trigger production servers to pull latest version of Docker Image') {
