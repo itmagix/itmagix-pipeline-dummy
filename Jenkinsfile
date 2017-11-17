@@ -58,12 +58,12 @@ node('itmagix-testrunner1') {
        sh 'echo "FROM openjdk:alpine" > target/Dockerfile'
        sh 'echo "COPY itmagix-pipeline-dummy-0.0.1.jar /itmagix-pipeline-dummy-0.0.1.jar" >> target/Dockerfile'
        sh 'echo "CMD [java -jar /itmagix-pipeline-dummy-0.0.1.jar]" >> target/Dockerfile'
-       sh '(cd target && sudo docker build -t itmagix/itmagix-pipeline-dummy .)'
+       //sh '(cd target && sudo docker build -t itmagix/itmagix-pipeline-dummy .)'
      }
       
      stage ('Push Docker image to Docker Hub') {
-       withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-         sh "sudo docker login -u maikeldolle -p secret"
+       withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+         sh "sudo docker login -u $USER -p $PASS"
        }
        sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
        sh "sudo docker logout"
