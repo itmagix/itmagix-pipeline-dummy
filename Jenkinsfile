@@ -75,7 +75,7 @@ node('itmagix-testrunner1') {
          // available as an env variable, but will be masked if you try to print it out any which way
          sh 'echo "Show as shell command"'
          sh 'echo $PASSWORD $USERNAME'
-         sh "sudo docker login -u $USERNAME --password-stdin $PASSWORD"
+         sh "sudo docker login -u $USERNAME -p $PASSWORD"
          sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
        }
      }
