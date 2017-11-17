@@ -74,7 +74,7 @@ node('itmagix-testrunner1') {
        sh 'echo push docker image to hub'
      }
 
-     stage ('Trigger production servers to pull latest version of Docker Image')
+     stage ('Trigger production servers to pull latest version of Docker Image') {
        sh 'echo docker -H tcp://ipdress:2375 pull itmagix-pipeline-dummy:latest'
      }
 
