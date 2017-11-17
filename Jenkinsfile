@@ -67,7 +67,7 @@ node('itmagix-testrunner1') {
        sh 'echo "FROM openjdk:alpine" > target/Dockerfile'
        sh 'echo "COPY target/itmagix-pipeline-dummy-0.0.1.jar /itmagix-pipeline-dummy-0.0.1.jar" >> target/Dockerfile'
        sh 'echo "CMD [java -jar /itmagix-pipeline-dummy-0.0.1.jar]" >> target/Dockerfile'
-       sh 'docker build -t itmagix-pipeline-dummy target/'
+       sh 'sudo docker build -t itmagix-pipeline-dummy target/'
      }
 
      stage ('Closing the Springboot environment') {
