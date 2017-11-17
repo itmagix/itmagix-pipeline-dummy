@@ -30,15 +30,6 @@ node('ec2-buildrunner1') {
          sh "/usr/local/maven/bin/mvn clean install"
          sh "(cd test && npm install)"
          stash name: 'source', useDefaultExcludes: true
-         withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-         // available as an env variable, but will be masked if you try to print it out any which way
-         sh 'echo "Show as shell command"'
-         sh 'echo $PASSWORD $USERNAME'
-         // also available as a Groovy variable—note double quotes for string interpolation
-         sh 'echo "Show as Groovy"'
-         echo "$USERNAME"
-         echo "$PASSWORD"
-}
        }
      }
 }
@@ -72,7 +63,7 @@ node('itmagix-testrunner1') {
       
      stage ('Push Docker image to Docker Hub') {
        withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-         sh "sudo docker login -u $USERNAME -p $PASSWORD"
+         sh "sudo docker login -u $USERNAME -p $PASSWORD https://registry-1.docker.io/v2/"
        }
        sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
        sh "sudo docker logout"
