@@ -63,7 +63,7 @@ node('itmagix-testrunner1') {
       
      stage ('Push Docker image to Docker Hub') {
        withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-         sh "sudo docker login -u $USERNAME -p $PASSWORD https://registry-1.docker.io/v2/"
+         sh 'sudo docker login -u $USERNAME -p $PASSWORD https://registry-1.docker.io/v2/'
        }
        sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
        sh "sudo docker logout"
