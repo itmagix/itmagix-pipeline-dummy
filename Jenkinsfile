@@ -67,15 +67,20 @@ node('itmagix-testrunner1') {
        sh 'echo "FROM openjdk:alpine" > target/Dockerfile'
        sh 'echo "COPY itmagix-pipeline-dummy-0.0.1.jar /itmagix-pipeline-dummy-0.0.1.jar" >> target/Dockerfile'
        sh 'echo "CMD [java -jar /itmagix-pipeline-dummy-0.0.1.jar]" >> target/Dockerfile'
-       sh '(cd target && sudo docker build -t itmagix-pipeline-dummy .)'
+       sh '(cd target && sudo docker build -t itmagix/itmagix-pipeline-dummy .)'
      }
       
      stage ('Push Docker image to Docker Hub') {
-       sh 'echo push docker image to hub'
+       withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+         // available as an env variable, but will be masked if you try to print it out any which way
+         sh 'echo "Show as shell command"'
+         sh 'echo $PASSWORD $USERNAME'
+         sh "sudo docker login -u $USERNAME --password-stdin $PASSWORD"
+         sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
      }
 
      stage ('Trigger production servers to pull latest version of Docker Image') {
-          sh "docker -H tcp://${REMOTE_HOST}:${REMOTE_PORT} run -p 80:${APP_PORT} itmagix-pipeline-dummy:latest"
+          sh "docker -H tcp://${REMOTE_HOST}:${REMOTE_PORT} run -p 80:${APP_PORT} itmagix/itmagix-pipeline-dummy:latest"
      }
 
      stage ('Clean up the test environment') {
