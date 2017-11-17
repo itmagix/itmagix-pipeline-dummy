@@ -69,8 +69,14 @@ node('itmagix-testrunner1') {
        sh 'echo "CMD [java -jar /itmagix-pipeline-dummy-0.0.1.jar]" >> target/Dockerfile'
        sh '(cd target && sudo docker build -t itmagix-pipeline-dummy .)'
      }
-
-     stage ('Closing the Springboot environment') {
-       sh "kill `ps -ef | grep java | grep pipeline-dummy | head -n1 | awk \$'{print \$2}'`"
+      
+     stage ('Push Docker image to Docker Hub') {
+       sh 'echo push docker image to hub'
      }
+
+     stage ('
+      stage ('Clean up the test environment') {
+        sh "kill `ps -ef | grep java | grep pipeline-dummy | head -n1 | awk \$'{print \$2}'`"
+        sh 'for i in `sudo docker images -q` ; do sudo docker rmi $i ; done'
+      }
 }
