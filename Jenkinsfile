@@ -63,14 +63,14 @@ node('itmagix-testrunner1') {
       
      stage ('Push Docker image to Docker Hub') {
        withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-         sh 'sudo docker login -u $USERNAME -p $PASSWORD https://registry-1.docker.io/v2/'
+         sh "sudo docker login -u maikeldolle -p secret"
        }
        sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
        sh "sudo docker logout"
      }
 
      stage ('Trigger production servers to pull latest version of Docker Image') {
-          sh "docker -H tcp://${REMOTE_HOST}:${REMOTE_PORT} run -p 80:${APP_PORT} itmagix/itmagix-pipeline-dummy:latest"
+          sh "sudo docker -H tcp://${REMOTE_HOST}:${REMOTE_PORT} run -p 80:${APP_PORT} itmagix/itmagix-pipeline-dummy:latest"
      }
 
      stage ('Clean up the test environment') {
