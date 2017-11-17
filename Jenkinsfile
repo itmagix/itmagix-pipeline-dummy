@@ -1,6 +1,6 @@
 #!groovy
 
-def REMOTE_HOST = 'docker.itmagix.nl'
+def REMOTE_HOST = '46.101.122.44'
 def LOCAL_HOST = '127.0.0.1'
 def REMOTE_PORT = '2375'
 def DOCKER_HOST = REMOTE_HOST + ':' + REMOTE_PORT
@@ -75,7 +75,7 @@ node('itmagix-testrunner1') {
      }
 
      stage ('Trigger production servers to pull latest version of Docker Image') {
-       sh 'echo docker -H tcp://ipdress:2375 pull itmagix-pipeline-dummy:latest'
+          sh "docker -H tcp://${REMOTE_HOST}:${REMOTE_PORT} run -p 80:${APP_PORT} itmagix-pipeline-dummy:latest"
      }
 
      stage ('Clean up the test environment') {
