@@ -76,7 +76,7 @@ node('itmagix-testrunner1') {
      stage ('Trigger production servers to pull latest version of Docker Image') {
           sh "sudo docker -H tcp://${DOCKER_HOST} pull itmagix/itmagix-pipeline-dummy:latest"
           sh 'for i in `sudo docker -H tcp://46.101.122.44:2375 ps -a -q` ; do sudo docker -H tcp://46.101.122.44:2375 stop $i && sudo docker -H tcp://46.101.122.44:2375 rm $i ; done'
-          sh "sudo docker -H tcp://${DOCKER_HOST} run -d -p 80:8080 --rm itmagix/itmagix-pipeline-dummy:latest"
+          sh "sudo docker -H tcp://${DOCKER_HOST} run -d -p 80:8080 itmagix/itmagix-pipeline-dummy:latest"
      }
 
      stage ('Clean up the test environment') {
