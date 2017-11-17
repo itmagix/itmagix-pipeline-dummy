@@ -39,9 +39,11 @@ node('itmagix-testrunner1') {
       sh "find -name node_modules | xargs rm -fr"
       step([$class: 'WsCleanup', deleteDirs: true, notFailBuild: true, patterns: [[pattern: '*', type: 'INCLUDE']]])
      }
+     
     stage('Show Environment temp') {
        sh "env"
      }
+     
     stage('Starting Application') {
        unstash 'source'
       sh "java -jar target/itmagix-pipeline-dummy-0.0.1.jar --server.port=${APP_PORT} &"
