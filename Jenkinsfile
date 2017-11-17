@@ -74,9 +74,12 @@ node('itmagix-testrunner1') {
        sh 'echo push docker image to hub'
      }
 
-     stage ('
-      stage ('Clean up the test environment') {
-        sh "kill `ps -ef | grep java | grep pipeline-dummy | head -n1 | awk \$'{print \$2}'`"
-        sh 'for i in `sudo docker images -q` ; do sudo docker rmi $i ; done'
-      }
+     stage ('Trigger production servers to pull latest version of Docker Image')
+       sh 'echo docker -H tcp://ipdress:2375 pull itmagix-pipeline-dummy:latest'
+     }
+
+     stage ('Clean up the test environment') {
+       sh "kill `ps -ef | grep java | grep pipeline-dummy | head -n1 | awk \$'{print \$2}'`"
+       sh 'for i in `sudo docker images -q` ; do sudo docker rmi $i ; done'
+     }
 }
