@@ -70,7 +70,7 @@ node('itmagix-testrunner1') {
      }
 
      stage ('Trigger production servers to pull latest version of Docker Image') {
-          sh "sudo docker -H tcp://${REMOTE_HOST}:${REMOTE_PORT} run -p 80:${APP_PORT} itmagix/itmagix-pipeline-dummy:latest"
+          sh "sudo docker -H tcp://${DOCKER_HOST} run -p 80:${APP_PORT} itmagix/itmagix-pipeline-dummy:latest"
      }
 
      stage ('Clean up the test environment') {
