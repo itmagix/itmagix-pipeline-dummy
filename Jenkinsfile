@@ -1,6 +1,6 @@
 #!groovy
 
-def REMOTE_HOST = '46.101.122.44'
+def REMOTE_HOST = 'rabobank.itmagix.nl'
 def LOCAL_HOST = '127.0.0.1'
 def REMOTE_PORT = '2375'
 def DOCKER_HOST = REMOTE_HOST + ':' + REMOTE_PORT
