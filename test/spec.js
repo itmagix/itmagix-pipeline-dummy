@@ -4,11 +4,13 @@ describe('IT Magix Pipeline Demo', function() {
     browser.waitForAngularEnabled(false);
     browser.get('http://192.168.2.121:11666');
     expect(browser.getTitle()).toEqual('IT Magix Pipeline Dummy Application');
+    browser.manage().timeouts().pageLoadTimeout(5000);  // 5 seconds
   });
 
   it('should be able to open pipeline app', function() {
     browser.waitForAngularEnabled(false);
     browser.get('http://192.168.2.121:11666/pipeline');
     expect(browser.getTitle()).toEqual('IT Magix Pipeline Dummy Application');
+    browser.manage().timeouts().pageLoadTimeout(5000);  // 5 seconds
   });
 });
