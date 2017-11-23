@@ -7,7 +7,6 @@ def DOCKER_HOST = REMOTE_HOST + ':' + REMOTE_PORT
 def APP_PORT = '11666'
 def MASTER_BRANCH = env.BRANCH_NAME == "master"
 def DEVELOP_BRANCH = env.BRANCH_NAME == "develop"
-def FRANKFURT2OUT = `curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer c6a77779030b563ed48de572f8597229b8727ce7ecc311c3d06ee637989ca37f" -d '{"name":"itmagix-pipeline-demo","region":"fra1","algorithm":"least_connections","forwarding_rules":[{"entry_protocol":"http","entry_port":80,"target_protocol":"http","target_port":80},{"entry_protocol":"https","entry_port":444,"target_protocol":"https","target_port":443,"tls_passthrough":true}],"health_check":{"protocol":"http","port":80,"path":"/","check_interval_seconds":10,"response_timeout_seconds":5,"healthy_threshold":5,"unhealthy_threshold":3},"sticky_sessions":{"type":"cookies", "cookie_name": "DO_LB", "cookie_ttl_seconds": 300}, "droplet_ids": [72120140]}' "https://api.digitalocean.com/v2/load_balancers/bdf54881-b0b1-411c-84bb-27b4282d2710"`
 
 // It's a kind of magic!
 node('ec2-buildrunner1') {
@@ -73,11 +72,7 @@ node('itmagix-testrunner1') {
        sh 'sudo docker push itmagix/itmagix-pipeline-dummy'
        sh "sudo docker logout"
      }
-
-     stage ('Take Frankfurt 1 Out of Service') {
-          sh "${FRANKFURT2OUT} 
-     }
-     
+  
      stage ('Trigger production servers to pull latest version of Docker Image') {
           sh "sudo docker -H tcp://${DOCKER_HOST} pull itmagix/itmagix-pipeline-dummy:latest"
           sh 'for i in `sudo docker -H tcp://46.101.122.44:2375 ps -a -q` ; do sudo docker -H tcp://46.101.122.44:2375 stop $i && sudo docker -H tcp://46.101.122.44:2375 rm $i ; done'
