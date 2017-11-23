@@ -65,7 +65,7 @@ node('itmagix-testrunner1') {
        sh '(cd target && sudo docker build -t itmagix/itmagix-pipeline-dummy .)'
      }
       
-     stage ('Push Docker image to Docker Hub') {
+     stage ('Push Docker image to Nexus 3') {
        withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
          sh "sudo docker login -u $USER -p $PASS"
        }
@@ -73,7 +73,7 @@ node('itmagix-testrunner1') {
        sh "sudo docker logout"
      }
       
-     stage ('Trigger production servers to pull latest version of Docker Image') {
+     stage ('Pivotal Deploy') {
           sh "sudo docker -H tcp://${DOCKER_HOST} pull itmagix/itmagix-pipeline-dummy:latest"
           sh 'for i in `sudo docker -H tcp://46.101.122.44:2375 ps -a -q` ; do sudo docker -H tcp://46.101.122.44:2375 stop $i && sudo docker -H tcp://46.101.122.44:2375 rm $i ; done'
           sh "sudo docker -H tcp://${DOCKER_HOST} run -d -p 80:8080 itmagix/itmagix-pipeline-dummy:latest"
